@@ -11,7 +11,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setResults(state, data) {
-      state.results = data
+      state.results = data.filter(s => s.kind == 'song')
     }
   },
   actions: {
