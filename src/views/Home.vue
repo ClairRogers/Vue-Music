@@ -1,18 +1,45 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home pt-3 container-fluid">
+    <form @submit.prevent="search" class="mb-3">
+      <input type="text" placeholder="search by title" v-model="query" required>
+      <button class="btn btn-light btn-sm ml-1" type="submit">Search</button>
+    </form>
+    <results>
+
+    </results>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
+<script>
+  import Results from '@/components/Results.vue'
+
+  export default {
+    name: 'home',
+    data() {
+      return {
+        query: ''
+      }
+    },
+    computed: {
+      results() {
+        return movies
+      }
+    },
+    methods: {
+      search() {
+        this.$store.dispatch('getMusicByArtist', this.query)
+      }
+    },
+    components: {
+      Results
+    }
   }
-}
 </script>
+
+
+<style>
+  .home {
+    background-color: #ab060f;
+  }
+</style>
